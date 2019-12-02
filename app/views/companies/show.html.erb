@@ -1,0 +1,10 @@
+<h3><%= @company.name %></h3>
+<h2><%= @company.description %></h2>
+<h2><%= @timezone_data.find_by(code: @company.country_code).name %></h2>
+
+<%= link_to "Create a New Shared Calendar", new_calendar_path %>
+
+
+
+
+
