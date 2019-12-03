@@ -9,10 +9,11 @@ class CompaniesController < ApplicationController
     @country = Timezone.find_by(code: @company.country_code).name
     @calendars = @company.calendars.count > 0 ? @company.calendars : nil
 
+    reset_session
     session[:the_company] ||= []
-    session[:the_company] << params[:id]
+    session[:the_company].push(params[:id]) unless session[:the_company].include?(params[:id])
     session[:partners] ||= []
-    session[:partners] << params[:id]
+    session[:partners].push(params[:id]) unless session[:partners].include?(params[:id])
   end
 
   def new
@@ -40,6 +41,5 @@ class CompaniesController < ApplicationController
       :close_time
     )
   end
-
 
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :meetings
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   ## companies
@@ -8,9 +9,10 @@ Rails.application.routes.draw do
   get '/companies/:id', to: "companies#show", as: "company"
 
   ## calendars
+  post '/calendars/add_holidays', to: "calendars#add_holidays"
   post '/calendars/add_partner', to: "calendars#add_partner"
   post '/calendars', to: "calendars#create"
-  get '/calendar/new', to: "calendars#new", as: "new_calendar"
+  get '/calendars/new', to: "calendars#new", as: "new_calendar"
   get '/calendars/:id', to: "calendars#show", as: "calendar"
 
 

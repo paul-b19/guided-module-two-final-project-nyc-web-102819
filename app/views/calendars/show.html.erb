@@ -1,0 +1,12 @@
+<%= month_calendar events: @meetings do |date, meetings| %>
+    <%= date %>
+  
+    <% meetings.each do |meeting| %>
+      <div>
+        <%= meeting.name %>
+      </div>
+    <% end %>
+<% end %>
+
+
+<h3><%= button_to "Add Holidays", { action: "add_holidays", id: @calendar.id } %> </h3>

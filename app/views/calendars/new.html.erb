@@ -1,14 +1,13 @@
-<h1> New Calendar </h1>
+<h1> New Shared Calendar </h1>
 
 <% @companies.each do |company| %>
   <%= company.name %>
-  <%= button_to 'Add Partner', { action: 'add_partner', id: company.id } %>
+  <%= button_to "Add Partner", { action: "add_partner", id: company.id } %>
   <br>
 <% end %>
-
 
 <%= button_to "Create", { action: "create" } %>
 
 <hr>
 
-<h3><%= link_to "Back to Company Dashboard" %></h3>
+<h3><%= link_to "Back to Company Dashboard", company_path(@company) %></h3>
