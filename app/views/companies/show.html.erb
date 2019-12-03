@@ -1,8 +1,32 @@
-<h3><%= @company.name %></h3>
-<h2><%= @company.description %></h2>
-<h2><%= @timezone_data.find_by(code: @company.country_code).name %></h2>
+<h1> Company Dashboarb </h1>
 
-<%= link_to "Create a New Shared Calendar", new_calendar_path %>
+<hr>
+
+<h2> Company: <%= @company.name %></h1>
+<h2> Description: <%= @company.description %></h2>
+<h2> Location: <%= @country %></h2>
+<h2> Time zone: <%= @company.time_zone_offset %></h2>
+
+<hr>
+
+<h3><%= link_to "Create a New Shared Calendar", new_calendar_path %></h3>
+
+<hr>
+
+<h3> Select Calendar: </h3>
+<% if @calendars %>
+  <% @calendars.each do |calendar| %>
+    <ul>
+      <li><h3><%= link_to calendar.name, calendar_path(calendar) %></h3></li>
+    </ul>
+  <% end %>
+<% else %>
+  <h3> There is no calendars created yet. <%= link_to "Create a New Shared Calendar", new_calendar_path %></h3>
+<% end %>
+
+<hr>
+
+<h3><%= link_to "Back to Main Menu", companies_path %></h3>
 
 
 

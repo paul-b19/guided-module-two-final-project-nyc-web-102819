@@ -1,7 +1,7 @@
 class CalendarsController < ApplicationController
 
   def show
-
+    @calendar = Calendar.find(params[:id])
   end
 
   def add_partner
@@ -11,12 +11,12 @@ class CalendarsController < ApplicationController
   def new
     @calendar = Calendar.new
     @companies = Company.all
-    @company = Company.find(session[:the_company].first)
-    byebug
+    # @company = Company.find(session[:the_company])
+    # byebug
   end
 
   def create
-
+    @calendar = Calendar.new
   end
 
   private

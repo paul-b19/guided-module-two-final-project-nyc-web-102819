@@ -1,9 +1,15 @@
-<h3>Select or create new company</h3>
+<h1> Select or Create New Company </h1>
 
-<%= link_to 'Create New Company', new_company_path %>
+<hr>
+
+<h3><%= link_to 'Create New Company', new_company_path %></h3>
+
+<hr>
 
 <% @companies.each do |company| %>
-  <h3><%= link_to company.name, company_path(company) %></h3>
+  <ul>
+    <li><h2><%= link_to company.name, company_path(company) %></h2></li>
+  </ul>
 <% end %>
 
 

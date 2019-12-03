@@ -1,0 +1,40 @@
+<h1> New Company </h1>
+
+<hr>
+
+<%= form_for @company do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <br>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <br>
+  <br>
+  <%= f.label :country_code, "Location" %>
+  <%= f.collection_select :country_code, @countries, :code, :name, prompt: true %>
+  <br>
+  <br>
+  <%= f.label :time_zone_offset, "Time zone" %>
+  <%= f.collection_select :time_zone_offset, @timezones, :offset, :zone, prompt: true %>
+  <br>
+  <br>
+  <%= f.label :work_days, "Work days (0,1,2,3,4)" %>
+  <%= f.text_field :work_days %>
+  <br>
+  <br>
+  <%= f.label :open_time, "Open (hh:mm)" %>
+  <%= f.text_field :open_time %>
+  <br>
+  <br>
+  <%= f.label :close_time, "Close (hh:mm)" %>
+  <%= f.text_field :close_time %>
+  <br>
+  <br>
+  <%= f.submit %>
+  <br>
+<% end %>
+
+<hr>
+
+<h3><%= link_to "Back to Main Menu", companies_path %></h3>

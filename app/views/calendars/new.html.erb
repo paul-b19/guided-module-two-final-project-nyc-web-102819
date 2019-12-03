@@ -1,4 +1,4 @@
-<h1> Hi <%= @company.name %>, please select partners: </h1>
+<h1> New Calendar </h1>
 
 <% @companies.each do |company| %>
   <%= company.name %>
@@ -8,3 +8,7 @@
 
 
 <%= button_to "Create", { action: "create" } %>
+
+<hr>
+
+<h3><%= link_to "Back to Company Dashboard" %></h3>
