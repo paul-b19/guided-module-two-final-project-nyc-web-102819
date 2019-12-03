@@ -7,7 +7,7 @@ Timezone.destroy_all
 Company.destroy_all
 Partnership.destroy_all
 Calendar.destroy_all
-Event.destroy_all
+Meeting.destroy_all
 puts "Deleted! 👻"
 
 ## seeding timezones from '/lib/seeds/time_zones.csv'
@@ -47,7 +47,7 @@ puts "Done! ✅"
 
 ## seeding partnerships
 ## seeding calendars
-## seeding events
+## seeding meetings
 
 # response = RestClient::Request.execute(
 # method: :get,
