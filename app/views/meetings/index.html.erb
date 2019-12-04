@@ -18,7 +18,7 @@
         <td><%= meeting.name %></td>
         <td><%= meeting.start_time %></td>
         <td><%= meeting.end_time %></td>
-        <td><%= link_to 'Show', meeting %></td>
+        <td><%= link_to 'Show', sti_meeting_path(meeting.type, meeting) %></td>
         <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
         <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

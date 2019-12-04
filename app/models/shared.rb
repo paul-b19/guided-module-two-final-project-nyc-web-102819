@@ -1,0 +1,3 @@
+class Shared < Meeting
+ 
+end

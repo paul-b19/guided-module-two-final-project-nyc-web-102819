@@ -15,5 +15,6 @@
   <%= @meeting.end_time %>
 </p>
 
+<%= link_to "New #{@type}", sti_meeting_path(@type, nil, :new) %> |
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
-<%= link_to 'Back', meetings_path %>
+<%= link_to 'Back', sti_meeting_path %>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :meetings
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  root 'companies#index'
 
   ## companies
   get '/companies', to: "companies#index", as: "companies"
@@ -15,14 +16,19 @@ Rails.application.routes.draw do
   get '/calendars/new', to: "calendars#new", as: "new_calendar"
   get '/calendars/:id', to: "calendars#show", as: "calendar"
 
+  ## meetings
+  # resources :meetings
+  get '/meetings', to: "meetings#index", as: "meetings"
+  post '/meetings', to: "meetings#create"
+  get '/meetings/new', to: "meetings#new", as: "new_meeting"
+  get '/meetings/:id/edit', to: "meetings#edit", as: "edit_meeting"
+  get '/meetings/:id', to: "meetings#show", as: "meeting"
+  patch '/meetings/:id', to: "meetings#update"
+  delete 'meetings/:id', to: "meetings#destroy"
 
-
-  
-  ## partnerships
-  # post '/parterships', to: "parterships#create"
-
-  ## events
-  # post '/events', to: "events#create"
+  resources :holidays, controller: 'meetings', type: 'Holiday' 
+  resources :privates, controller: 'meetings', type: 'Private' 
+  resources :shareds, controller: 'meetings', type: 'Shared'
 
 
 end

@@ -16,19 +16,19 @@
   <br>
   <br>
   <%= f.label :time_zone_offset, "Time zone" %>
-  <%= f.collection_select :time_zone_offset, @timezones, :offset, :zone, prompt: true %>
+  <%= f.time_zone_select(:time_zone_offset, @timezones, prompt: true) %>
   <br>
   <br>
   <%= f.label :work_days, "Work days (0,1,2,3,4)" %>
   <%= f.text_field :work_days %>
   <br>
   <br>
-  <%= f.label :open_time, "Open (hh:mm)" %>
-  <%= f.text_field :open_time %>
+  <%= f.label :open_time, "Open" %>
+  <%= f.time_field :open_time %>
   <br>
   <br>
-  <%= f.label :close_time, "Close (hh:mm)" %>
-  <%= f.text_field :close_time %>
+  <%= f.label :close_time, "Close" %>
+  <%= f.time_field :close_time %>
   <br>
   <br>
   <%= f.submit %>

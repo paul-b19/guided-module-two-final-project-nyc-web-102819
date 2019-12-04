@@ -1,0 +1,3 @@
+class Private < Meeting
+ 
+end

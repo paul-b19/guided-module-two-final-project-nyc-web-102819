@@ -1,10 +1,12 @@
 class MeetingsController < ApplicationController
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
+  before_action :set_type
 
   # GET /meetings
   # GET /meetings.json
   def index
-    @meetings = Meeting.all
+    # @meetings = Meeting.all
+    @meetings = type_class.all
   end
 
   # GET /meetings/1
@@ -14,7 +16,8 @@ class MeetingsController < ApplicationController
 
   # GET /meetings/new
   def new
-    @meeting = Meeting.new
+    # @meeting = Meeting.new
+    @meeting = type_class.new
   end
 
   # GET /meetings/1/edit
@@ -25,10 +28,13 @@ class MeetingsController < ApplicationController
   # POST /meetings.json
   def create
     @meeting = Meeting.new(meeting_params)
+    # byebug
+    @meeting.company_id = session[:the_company].first.to_i
+    @meeting.calendar_id = session[:the_calendar]
 
     respond_to do |format|
       if @meeting.save
-        format.html { redirect_to @meeting, notice: 'Meeting was successfully created.' }
+        format.html { redirect_to @meeting, notice: "#{type} was successfully created." }
         format.json { render :show, status: :created, location: @meeting }
       else
         format.html { render :new }
@@ -62,13 +68,37 @@ class MeetingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_meeting
-      @meeting = Meeting.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def meeting_params
-      params.require(:meeting).permit(:name, :start_time, :end_time)
-    end
+  def set_type 
+    @type = type 
+  end
+
+  def type 
+    Meeting.types.include?(params[:type]) ? params[:type] : "Meeting"
+  end
+
+  def type_class 
+    type.constantize 
+  end
+
+  def set_meeting
+    @meeting = type_class.find(params[:id])
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_meeting
+    @meeting = Meeting.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def meeting_params
+    params.require(type.underscore.to_sym).permit(
+      :name,
+      :type,
+      :description,
+      :start_time,
+      :end_time
+    )
+  end
+  
 end

@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+  require 'tzinfo'
 
   def index
     @companies = Company.all
@@ -14,12 +15,14 @@ class CompaniesController < ApplicationController
     session[:the_company].push(params[:id]) unless session[:the_company].include?(params[:id])
     session[:partners] ||= []
     session[:partners].push(params[:id]) unless session[:partners].include?(params[:id])
+    session[:timezone] = @company.time_zone_offset
   end
 
   def new
     @company = Company.new
     @countries = Timezone.group(:name)
-    @timezones = Timezone.group(:zone)
+    @timezones = ActiveSupport::TimeZone.all
+    # @timezones = TZInfo::Timezone.all_country_zones
   end
 
   def create
