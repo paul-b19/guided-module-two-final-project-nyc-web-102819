@@ -1,7 +1,4 @@
-<h1>New <%=  "#{@type.capitalize}" %></h1>
-
-<%= link_to 'Back', sti_meeting_path(@type) %>
-
+<h1>New <%= "#{@type.capitalize}" %> Event</h1>
 
 <%= form_for(@meeting) do |f| %>
   <% if @meeting.errors.any? %>
@@ -42,6 +39,10 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create #{@type.capitalize} Event" %>
   </div>
 <% end %>
+
+<hr>
+
+<%= link_to 'Back to calendar', calendar_path(@calendar) %>

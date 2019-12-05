@@ -1,20 +1,54 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @meeting.name %>
+  <strong>Current calendar:</strong>
+  <%= @meeting.calendar.name %>
 </p>
 
-<p>
-  <strong>Start time:</strong>
-  <%= @meeting.start_time %>
-</p>
+<% if @session_company.id != @meeting.company_id && @meeting.type == "Private" %>
 
-<p>
-  <strong>End time:</strong>
-  <%= @meeting.end_time %>
-</p>
+  <strong>This Is <%= @company.name %> Private Event </strong>
+  <br>
 
-<%= link_to "New #{@type}", sti_meeting_path(@type, nil, :new) %> |
-<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
-<%= link_to 'Back', sti_meeting_path %>
+<% elsif @meeting.type == "Holiday" %>
+
+  <strong>This Is <%= @meeting.name %></strong>
+  <br>
+
+<% else %>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @meeting.name %>
+  </p>
+  
+  <p>
+    <strong>Description:</strong>
+    <%= @meeting.description %>
+  </p>
+  
+  <p>
+    <strong>Created by:</strong>
+    <%= @company.name %>
+  </p>
+  
+  <p>
+    <strong>Start time:</strong>
+    <%= @meeting.start_time %>
+  </p>
+  
+  <p>
+    <strong>End time:</strong>
+    <%= @meeting.end_time %>
+  </p>
+  
+  <% if @session_company.id == @meeting.company_id || @meeting.type == "Shared" %>
+    <%= link_to "Edit #{@type.capitalize} Event", edit_meeting_path(@meeting) %> |
+    <%= link_to "Delete #{@type.capitalize} Event", meeting_path(@meeting), :method => :delete, :confirm => "Are you sure?" %> |
+  <% elsif @meeting.type = "Private" && @session_company.id == @meeting.company_id %>
+    <%= link_to "Edit #{@type.capitalize} Event", edit_meeting_path(@meeting) %> |
+    <%= link_to "Delete #{@type.capitalize} Event", meeting_path(@meeting), :method => :delete, :confirm => "Are you sure?" %> |
+  <% end %>
+<% end %>
+
+<%= link_to 'Back To Calendar', calendar_path(@meeting.calendar) %>

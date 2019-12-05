@@ -1,19 +1,16 @@
-<h2><%= @calendar.name %></h2>
+<h2 style="color:#6610f2;"><%= @calendar.name %></h2>
 <% if flash[:notice] %>
   <h2><div class="notice"><%= flash[:notice] %></div></h2>
 <% end %>
 <hr>
-
 <%= month_calendar events: @meetings do |date, meetings| %>
     <%= date %>
-  
     <% meetings.each do |meeting| %>
-      <div>
-        <%= meeting.name %>
+      <div style="font-weight:bold;">
+        <%= link_to meeting.name, meeting_path(meeting) %>
       </div>
     <% end %>
 <% end %>
-
-
-<h3><%= button_to( "New Meeting", new_meeting_path, :method => :get ) %> </h3>
-<h3><%= link_to "Back to Company Dashboard", company_path(session[:the_company]) %></h3>
+<h4><%= button_to( "Create new private event", new_private_path, :method => :get ) %> </h4>
+<h4><%= button_to( "Create new shared event", new_shared_path, :method => :get ) %> </h4>
+<h4><%= link_to "Back to Company Dashboard", company_path(session[:the_company]) %></h4>

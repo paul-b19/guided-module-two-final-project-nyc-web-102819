@@ -12,29 +12,35 @@ class MeetingsController < ApplicationController
   # GET /meetings/1
   # GET /meetings/1.json
   def show
+    @meeting = Meeting.find(params[:id])
+    @company = Company.find(@meeting.company_id)
+    @session_company = Company.find(session[:the_company]).first
   end
 
   # GET /meetings/new
   def new
     # @meeting = Meeting.new
     @meeting = type_class.new
+    @calendar = Calendar.find(session[:the_calendar])
   end
 
   # GET /meetings/1/edit
   def edit
+    @meeting = type_class.find(params[:id])
   end
 
   # POST /meetings
   # POST /meetings.json
   def create
-    @meeting = Meeting.new(meeting_params)
+    @meeting = type_class.new(meeting_params)
+    # @meeting = Meeting.new(meeting_params)
     # byebug
     @meeting.company_id = session[:the_company].first.to_i
     @meeting.calendar_id = session[:the_calendar]
 
     respond_to do |format|
       if @meeting.save
-        format.html { redirect_to @meeting, notice: "#{type} was successfully created." }
+        format.html { redirect_to @meeting, notice: "#{type.capitalize} event was successfully created." }
         format.json { render :show, status: :created, location: @meeting }
       else
         format.html { render :new }
@@ -48,7 +54,7 @@ class MeetingsController < ApplicationController
   def update
     respond_to do |format|
       if @meeting.update(meeting_params)
-        format.html { redirect_to @meeting, notice: 'Meeting was successfully updated.' }
+        format.html { redirect_to @meeting, notice: "#{type.capitalize} event was successfully updated." }
         format.json { render :show, status: :ok, location: @meeting }
       else
         format.html { render :edit }
@@ -60,9 +66,11 @@ class MeetingsController < ApplicationController
   # DELETE /meetings/1
   # DELETE /meetings/1.json
   def destroy
+    @meeting = Meeting.find(params[:id])
+    calendar = @meeting.calendar
     @meeting.destroy
     respond_to do |format|
-      format.html { redirect_to meetings_url, notice: 'Meeting was successfully destroyed.' }
+      format.html { redirect_to calendar_path(calendar), notice: "#{type.capitalize} event was successfully destroyed." }
       format.json { head :no_content }
     end
   end
