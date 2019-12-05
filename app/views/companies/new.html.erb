@@ -19,8 +19,12 @@
   <%= f.time_zone_select(:time_zone_offset, @timezones, prompt: true) %>
   <br>
   <br>
-  <%= f.label :work_days, "Work days (0,1,2,3,4)" %>
-  <%= f.text_field :work_days %>
+  <%= f.label :work_days, "Work days" %>
+  <% days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] %>
+  <% days.each do |day| %>
+    <%= f.check_box :work_days, { multiple: true }, day, false %>
+    <%= day %>
+  <% end %>
   <br>
   <br>
   <%= f.label :open_time, "Open" %>

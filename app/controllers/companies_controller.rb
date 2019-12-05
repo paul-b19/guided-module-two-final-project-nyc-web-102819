@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
-  require 'tzinfo'
+  # require 'tzinfo'
+  require 'json'
 
   def index
     @companies = Company.all
@@ -9,6 +10,7 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @country = Timezone.find_by(code: @company.country_code).name
     @calendars = @company.calendars.count > 0 ? @company.calendars : nil
+    @work_days = JSON.parse(@company.work_days).join(', ')
 
     reset_session
     session[:the_company] ||= []
@@ -39,9 +41,10 @@ class CompaniesController < ApplicationController
       :description,
       :country_code,
       :time_zone_offset,
-      :work_days,
+      # work_days:[],
       :open_time,
-      :close_time
+      :close_time,
+      work_days: []
     )
   end
 

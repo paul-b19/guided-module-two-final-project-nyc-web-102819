@@ -1,7 +1,7 @@
 <h1> New Shared Calendar </h1>
 
 <% @companies.each do |company| %>
-  <%= company.name %>
+  <%= "#{company.name} - #{Timezone.find_by(code:company.country_code).name}" %>
   <%= button_to "Add Partner", { action: "add_partner", id: company.id } %>
   <br>
 <% end %>

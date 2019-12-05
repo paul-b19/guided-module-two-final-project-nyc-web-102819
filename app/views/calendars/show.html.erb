@@ -1,3 +1,9 @@
+<h2><%= @calendar.name %></h2>
+<% if flash[:notice] %>
+  <h2><div class="notice"><%= flash[:notice] %></div></h2>
+<% end %>
+<hr>
+
 <%= month_calendar events: @meetings do |date, meetings| %>
     <%= date %>
   

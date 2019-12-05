@@ -35,9 +35,9 @@ puts "Seeding companies 🚧"
     name: "#{Faker::Company.name}"+" "+"#{Faker::Company.suffix}",
     description: Faker::Company.industry,
     country_code: tz.code,
-    time_zone_offset: tz.offset,
-    work_days: '0,1,2,3,4',
-    # work_days: (0..6).to_a.sample(5).join(","),
+    time_zone_offset: ActiveSupport::TimeZone.country_zones(tz.code).first.name,
+    # time_zone_offset: tz.offset,
+    work_days: "[\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\"]",
     open_time: "07:00",
     close_time: "19:00"
   )
