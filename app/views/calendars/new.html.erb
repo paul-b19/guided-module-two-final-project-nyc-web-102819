@@ -1,4 +1,7 @@
-<h1> New Shared Calendar </h1>
+<h2 style="color:#6610f2;"> New Shared Calendar </h2>
+<br>
+<h4> Select your partner(s) below: </h4>
+<br>
 
 <% @companies.each do |company| %>
   <%= "#{company.name} - #{Timezone.find_by(code:company.country_code).name}" %>
@@ -10,4 +13,4 @@
 
 <hr>
 
-<h3><%= link_to "Back to Company Dashboard", company_path(@company) %></h3>
+<h4><%= link_to "Back to Company Dashboard", company_path(@company) %></h4>

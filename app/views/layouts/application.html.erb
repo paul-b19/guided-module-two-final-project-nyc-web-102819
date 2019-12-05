@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GuidedModuleTwoFinalProjectNycWeb102819</title>
+    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <title>Shared Calendar App</title>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
-
+    
     <h1> Shared Calendar App </h1>
-    <hr>
+    <% if session[:the_company] %>
+      <h5> Current Account: <%= link_to Company.find(session[:the_company]).first.name, company_path(Company.find(session[:the_company]).first) %> </h5>
+    <% end %>
+    
     <hr>
 
     <%= yield %>
