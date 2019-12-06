@@ -64,10 +64,28 @@
 // label {
 //   display: block; }
 
+body {
+  padding-left: 75px;
+  padding-right: 75px;
+  background: url(/assets/world_map_background.gif) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;;
+ }
+
+h2 {
+  text-align: center;
+}
+
 .calendar-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
     padding-left: 15px;
     padding-right: 15px;    
+}
+
+.calendar-heading {
+    text-align: center;
 }
 
 .simple-calendar {

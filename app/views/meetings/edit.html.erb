@@ -1,7 +1,7 @@
-<h1>Editing <%= "#{@meeting.type.capitalize}" %> Event</h1>
+<h2 style="color:#6610f2;">Editing <%= "#{@meeting.type.capitalize}" %> Event</h2>
 <hr>
 
-<%= form_for(@meeting) do |f| %>
+<div style="padding-left:20px"><%= form_for(@meeting) do |f| %>
   <% if @meeting.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
@@ -39,9 +39,10 @@
     <%= f.submit "Update #{@meeting.type.capitalize} Event" %>
   </div>
 <% end %>
+</div>
+
 <hr>
 
 
-<%= link_to 'Back to Event', meeting_path(@meeting) %> |
-<%= link_to 'Back To Calendar', calendar_path(@meeting.calendar) %>
-
+<h4 style="padding-left:20px"><%= link_to 'Back to Event', meeting_path(@meeting) %></h4>
+<h4 style="padding-left:20px"><%= link_to 'Back To Calendar', calendar_path(@meeting.calendar) %></h4>

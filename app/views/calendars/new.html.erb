@@ -1,15 +1,30 @@
-<h2 style="color:#6610f2;"> New Shared Calendar </h2>
+<h2 style="color:#6610f2;" > New Shared Calendar </h2>
 <br>
-<h4> Select your partner(s) below: </h4>
+<h4 style="padding-left:20px"> Select your partner(s) below: </h4>
 <br>
 
-<% @companies.each do |company| %>
-  <%= "#{company.name} - #{Timezone.find_by(code:company.country_code).name}" %>
-  <%= button_to "Add Partner", { action: "add_partner", id: company.id } %>
-  <br>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th style="padding-left:20px">Company</th>
+      <th style="padding-left:20px">Country</th>
+    </tr>
+  </thead>
 
-<%= button_to "Create", { action: "create" } %>
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td style="padding-left:20px; padding-right:50px;"><%= company.name %></td>
+        <td style="padding-left:20px; padding-right:50px;"><%= Timezone.find_by(code:company.country_code).name %></td>
+        <td style="padding-left:20px; padding-right:50px;"><%= button_to "Add Partner", { action: "add_partner", id: company.id } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div style="padding-left:20px"><%= button_to "Create Calendar", { action: "create" } %>
 
 <hr>
 

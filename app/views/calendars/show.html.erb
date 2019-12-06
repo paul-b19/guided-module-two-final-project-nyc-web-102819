@@ -1,4 +1,10 @@
 <h2 style="color:#6610f2;"><%= @calendar.name %></h2>
+
+<h5> Partner(s) work schedule in your local time: </h5>
+<% @partner_days_hours.each do |partner|%>
+  <h5><%= partner %></h5>
+<% end %>
+
 <% if flash[:notice] %>
   <h2><div class="notice"><%= flash[:notice] %></div></h2>
 <% end %>
@@ -7,10 +13,11 @@
     <%= date %>
     <% meetings.each do |meeting| %>
       <div style="font-weight:bold;">
-        <%= link_to meeting.name, meeting_path(meeting) %>
+      <%= link_to "#{meeting.country_code if meeting.country_code} #{meeting.name}", meeting_path(meeting) %>
       </div>
     <% end %>
 <% end %>
-<h4><%= button_to( "Create new private event", new_private_path, :method => :get ) %> </h4>
-<h4><%= button_to( "Create new shared event", new_shared_path, :method => :get ) %> </h4>
-<h4><%= link_to "Back to Company Dashboard", company_path(session[:the_company]) %></h4>
+<h4 style="padding-left:20px"><%= button_to( "Create new private event", new_private_path, :method => :get ) %> </h4>
+<h4 style="padding-left:20px"><%= button_to( "Create new shared event", new_shared_path, :method => :get ) %> </h4>
+<hr>
+<h4 style="padding-left:20px"><%= link_to "Back to Company Dashboard", company_path(session[:the_company]) %></h4>
