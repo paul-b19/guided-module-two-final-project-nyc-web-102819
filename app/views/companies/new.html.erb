@@ -2,7 +2,7 @@
 
 <hr>
 
-<%= form_for @company do |f| %>
+<div style="padding-left:20px"><%= form_for @company do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br>
@@ -38,7 +38,7 @@
   <%= f.submit %>
   <br>
 <% end %>
-
+</div>
 <hr>
 
-<h4><%= link_to "Back to Main Menu", companies_path %></h4>
+<h4 style="padding-left:20px"><%= link_to "Back to Main Menu", companies_path %></h4>

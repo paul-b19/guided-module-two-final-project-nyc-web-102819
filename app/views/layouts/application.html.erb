@@ -5,7 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <title>Shared Calendar App</title>
+    <title>Calint</title>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -14,14 +14,16 @@
   </head>
 
   <body>
-    
-    <h1> Shared Calendar App </h1>
+
+    <%= link_to image_tag("logo_transparent", height: "200", width: "200"), root_path %>
+
     <% if session[:the_company] %>
-      <h5> Current Account: <%= link_to Company.find(session[:the_company]).first.name, company_path(Company.find(session[:the_company]).first) %> </h5>
+      <h5 style="text-align:right; padding-right:20px"> Current account: <%= link_to Company.find(session[:the_company]).first.name, company_path(Company.find(session[:the_company]).first) %> </h5>
     <% end %>
     
     <hr>
 
     <%= yield %>
+
   </body>
 </html>

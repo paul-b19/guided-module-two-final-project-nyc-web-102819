@@ -1,17 +1,17 @@
-<h2 style="color:#6610f2;"> Company Dashboard </h2>
+<h2 style="color:#6610f2"> Company Dashboard </h2>
 
 <hr>
 
-<h4> Company: <%= @company.name %></h4>
-<h4> Description: <%= @company.description %></h4>
-<h4> Location: <%= @country %></h4>
-<h4> Time zone: <%= @company.time_zone_offset %></h4>
-<h4> Work days: <%= @work_days %></h4>
-<h4> Open: <%= @company.open_time %> to <%= @company.close_time %> </h4>
+<h4 style="padding-left:20px"> Company: <%= @company.name %></h4>
+<h4 style="padding-left:20px"> Description: <%= @company.description %></h4>
+<h4 style="padding-left:20px"> Location: <%= @country %></h4>
+<h4 style="padding-left:20px"> Time zone: <%= @company.time_zone_offset %></h4>
+<h4 style="padding-left:20px"> Work days: <%= @work_days %></h4>
+<h4 style="padding-left:20px"> Open: <%= @company.open_time %> to <%= @company.close_time %> </h4>
 
 <hr>
 
-<h3> Select Calendar: </h3>
+<h4 style="padding-left:20px"> Select Calendar: </h4>
 <br>
 <% if @calendars %>
   <% @calendars.each do |calendar| %>
@@ -20,11 +20,12 @@
     </ul>
   <% end %>
 <% else %>
-  <h4 style="color:Tomato;"> <%=@company.name%> has not created any shared calendars. </h4> 
+  <h4 style="color:Tomato;padding-left:20px"> <%=@company.name%> has not created any shared calendars. </h4> 
   <br>
-  <h4> <%= link_to "Create a New Shared Calendar", new_calendar_path %> </h4>
+  
 <% end %>
-
+<br>
+<h4 style="padding-left:20px"> <%= link_to "🗓 Create a New Shared Calendar 🗓", new_calendar_path %> </h4>
 <hr>
 
-<h4><%= link_to "Back to Main Menu", companies_path %></h4>
+<h4 style="padding-left:20px"><%= link_to "Back to Main Menu", companies_path %></h4>

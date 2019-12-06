@@ -1,13 +1,16 @@
-<h2 style="color:#6610f2;"> Select or Create New Company </h2>
+<h2 style="color:#6610f2;"> Select or Create a New Company </h2>
 
 <hr>
 
-<h3><%= link_to 'Create New Company', new_company_path %></h3>
+<h4 style="padding-left:20px"><%= link_to '🏢 Create New Company 💼', new_company_path %></h4>
+<br>
 
-<hr>
-
+<h4 style="padding-left:20px"> Companies: </h4>
+<br>
 <% @companies.each do |company| %>
   <ul>
     <li><h5><%= link_to company.name, company_path(company) %></h5></li>
   </ul>
 <% end %>
+
+<hr>
