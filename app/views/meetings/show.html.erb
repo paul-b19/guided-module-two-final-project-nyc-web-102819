@@ -1,54 +1,44 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Current calendar:</strong>
-  <%= @meeting.calendar.name %>
-</p>
-
+<h6 id="notice" style="color:#6610f2"><%= notice %></h6>
+<h4 style="padding-left:20px">Current calendar:</h4>
+<br>
+<h6 style="padding-left:20px"><%= @meeting.calendar.name %></h6>
+<br> 
 <% if @session_company.id != @meeting.company_id && @meeting.type == "Private" %>
-
-  <strong>This Is <%= @company.name %> Private Event </strong>
+  <strong style="padding-left:20px">This is a Private Event for <%= @company.name %></strong>
   <br>
-
+  <br>
 <% elsif @meeting.type == "Holiday" %>
-
-  <strong>This Is <%= @meeting.name %></strong>
+  <h4 style="padding-left:20px"> This is <%= @meeting.name %> in <%= @country %> </h4>
   <br>
-
+  <h6 style="padding-left:20px"><%= @meeting.description %></h6>
+  <hr>
 <% else %>
-
-  <p>
+  <p style="padding-left:20px">
     <strong>Name:</strong>
     <%= @meeting.name %>
   </p>
-  
-  <p>
+  <p style="padding-left:20px">
+    <strong>Type:</strong>
+    <%= "#{@meeting.type} event" %>
+  </p>
+  <p style="padding-left:20px">
     <strong>Description:</strong>
     <%= @meeting.description %>
   </p>
-  
-  <p>
+  <p style="padding-left:20px">
     <strong>Created by:</strong>
     <%= @company.name %>
   </p>
-  
-  <p>
+  <p style="padding-left:20px">
     <strong>Start time:</strong>
     <%= @meeting.start_time %>
   </p>
-  
-  <p>
+  <p style="padding-left:20px">
     <strong>End time:</strong>
     <%= @meeting.end_time %>
   </p>
-  
-  <% if @session_company.id == @meeting.company_id || @meeting.type == "Shared" %>
-    <%= link_to "Edit #{@type.capitalize} Event", edit_meeting_path(@meeting) %> |
-    <%= link_to "Delete #{@type.capitalize} Event", meeting_path(@meeting), :method => :delete, :confirm => "Are you sure?" %> |
-  <% elsif @meeting.type = "Private" && @session_company.id == @meeting.company_id %>
-    <%= link_to "Edit #{@type.capitalize} Event", edit_meeting_path(@meeting) %> |
-    <%= link_to "Delete #{@type.capitalize} Event", meeting_path(@meeting), :method => :delete, :confirm => "Are you sure?" %> |
-  <% end %>
+  <h4 style="padding-left:20px"><%= link_to "Edit #{@meeting.type.capitalize} Event", edit_meeting_path(@meeting) %></h4>
+  <h4 style="padding-left:20px"><%= link_to "Delete #{@meeting.type.capitalize} Event", meeting_path(@meeting), :method => :delete, :confirm => "Are you sure?" %></h4>
+  <hr>
 <% end %>
-
-<%= link_to 'Back To Calendar', calendar_path(@meeting.calendar) %>
+<h4 style="padding-left:20px"><%= link_to 'Back to Calendar', calendar_path(@meeting.calendar) %></h4>

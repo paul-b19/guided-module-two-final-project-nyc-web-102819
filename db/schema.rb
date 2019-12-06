@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2019_11_30_051224) do
     t.integer "company_id"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.string "country_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

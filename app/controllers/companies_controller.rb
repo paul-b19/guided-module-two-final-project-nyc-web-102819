@@ -41,7 +41,6 @@ class CompaniesController < ApplicationController
       :description,
       :country_code,
       :time_zone_offset,
-      # work_days:[],
       :open_time,
       :close_time,
       work_days: []

@@ -8,6 +8,7 @@ class CreateMeetings < ActiveRecord::Migration[6.0]
       t.integer :company_id
       t.datetime :start_time
       t.datetime :end_time
+      t.string :country_code
 
       t.timestamps
     end

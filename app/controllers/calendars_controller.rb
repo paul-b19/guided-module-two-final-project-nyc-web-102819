@@ -3,6 +3,16 @@ class CalendarsController < ApplicationController
 
   def show
     @calendar = Calendar.find(params[:id])
+    @partner_days_hours = []
+    @calendar.companies.each do |company|
+      if company.id != session[:the_company].first.to_i
+        open_t = Time.parse("#{company.open_time}").in_time_zone("#{company.time_zone_offset}")
+        open_time = "#{open_t.to_formatted_s(:time)}"
+        close_t = Time.parse("#{company.close_time}").in_time_zone("#{company.time_zone_offset}")
+        close_time = "#{close_t.to_formatted_s(:time)}"
+        @partner_days_hours << "#{company.name}: #{JSON.parse(company.work_days).join(', ')} | #{open_time} to #{close_time}"
+      end
+    end
     session[:the_calendar] = @calendar.id
     today = Time.zone.today
     if today.month == 10 || 11 || 12
@@ -49,21 +59,6 @@ class CalendarsController < ApplicationController
     end
   end
 
-  # def create
-  #   @company = Company.find(session[:the_company])
-  #   @calendar = Calendar.create
-  #   session[:the_calendar] = @calendar.id
-  #   partners = session[:partners]
-  #   partners.each do |partner|
-  #     @partnership = Partnership.create(company_id: partner, calendar_id: @calendar.id)
-  #   end
-  #   names = @calendar.companies.pluck(:name).join(' | ')
-  #   @calendar.update(name: "Calendar for #{names}")
-  #   # byebug
-  #   add_holidays(Time.zone.today.year)
-  #   redirect_to calendar_path(@calendar)
-  # end
-
   def add_holidays(year)
     calendar = Calendar.find(session[:the_calendar])
     companies = calendar.companies
@@ -75,7 +70,8 @@ class CalendarsController < ApplicationController
             name: holiday["name"],
             type: "Holiday",
             start_time: "#{holiday["date"]["iso"]} 00:00:00",
-            end_time: "#{holiday["date"]["iso"]} 23:59:00"
+            end_time: "#{holiday["date"]["iso"]} 23:59:00",
+            country_code: company.country_code
           )
           meeting.update(
             description: holiday["description"],

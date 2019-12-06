@@ -5,7 +5,6 @@ class MeetingsController < ApplicationController
   # GET /meetings
   # GET /meetings.json
   def index
-    # @meetings = Meeting.all
     @meetings = type_class.all
   end
 
@@ -14,12 +13,16 @@ class MeetingsController < ApplicationController
   def show
     @meeting = Meeting.find(params[:id])
     @company = Company.find(@meeting.company_id)
+    if @meeting.country_code
+      @country = Timezone.find_by(code: @meeting.country_code).name
+    else
+      @country = nil
+    end
     @session_company = Company.find(session[:the_company]).first
   end
 
   # GET /meetings/new
   def new
-    # @meeting = Meeting.new
     @meeting = type_class.new
     @calendar = Calendar.find(session[:the_calendar])
   end
@@ -33,8 +36,6 @@ class MeetingsController < ApplicationController
   # POST /meetings.json
   def create
     @meeting = type_class.new(meeting_params)
-    # @meeting = Meeting.new(meeting_params)
-    # byebug
     @meeting.company_id = session[:the_company].first.to_i
     @meeting.calendar_id = session[:the_calendar]
 
@@ -105,7 +106,8 @@ class MeetingsController < ApplicationController
       :type,
       :description,
       :start_time,
-      :end_time
+      :end_time,
+      :country_code
     )
   end
   
