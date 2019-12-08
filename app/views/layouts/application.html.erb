@@ -17,8 +17,9 @@
 
     <%= link_to image_tag("logo_transparent", height: "200", width: "200"), root_path %>
 
-    <% if session[:the_company] %>
-      <h5 style="text-align:right; padding-right:20px"> Current account: <%= link_to Company.find(session[:the_company]).first.name, company_path(Company.find(session[:the_company]).first) %> </h5>
+    <% if session[:the_company] && Company.exists?(id: session[:the_company]) %>
+      <% company = Company.find(session[:the_company].first) %>
+      <h5 style="text-align:right; padding-right:20px"> Current account: <%= link_to company.name, company_path(company) %> </h5>
     <% end %>
     
     <hr>

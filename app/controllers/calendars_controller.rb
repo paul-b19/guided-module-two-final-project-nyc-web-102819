@@ -3,12 +3,14 @@ class CalendarsController < ApplicationController
 
   def show
     @calendar = Calendar.find(params[:id])
+    account_company = Company.find(session[:the_company].first)
     @partner_days_hours = []
     @calendar.companies.each do |company|
       if company.id != session[:the_company].first.to_i
-        open_t = Time.parse("#{company.open_time}").in_time_zone("#{company.time_zone_offset}")
+        Time.zone = company.time_zone_offset
+        open_t = Time.zone.parse("#{company.open_time}").in_time_zone("#{account_company.time_zone_offset}")
         open_time = "#{open_t.to_formatted_s(:time)}"
-        close_t = Time.parse("#{company.close_time}").in_time_zone("#{company.time_zone_offset}")
+        close_t = Time.zone.parse("#{company.close_time}").in_time_zone("#{account_company.time_zone_offset}")
         close_time = "#{close_t.to_formatted_s(:time)}"
         @partner_days_hours << "#{company.name}: #{JSON.parse(company.work_days).join(', ')} | #{open_time} to #{close_time}"
       end
